@@ -1,0 +1,20 @@
+{
+  "name": "fargonia",
+  "version": "0.1.0",
+  "description": "Dark fantasy simulation sandbox with embodied play, observer mode, social pressure, and counterplay.",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/index.js",
+    "smoke": "node scripts/smokeTest.js"
+  },
+  "keywords": [
+    "simulation",
+    "dark-fantasy",
+    "npc-agency",
+    "observer-mode",
+    "counterplay"
+  ],
+  "author": "Leon Snow",
+  "license": "MIT"
+}
