@@ -3,6 +3,7 @@ const { createLogger } = require("./core/Logger");
 const { createSeedManager } = require("./core/Seed");
 const { createWorld } = require("./core/createWorld");
 const { printWorldSummary } = require("./core/printWorldSummary");
+const SaveManager = require("./persistence/SaveManager");
 
 function main() {
   const logger = createLogger({
@@ -16,12 +17,28 @@ function main() {
     encounterSeed: Dials.seeds.defaultEncounterSeed
   });
 
+  const saveManager = new SaveManager({
+    logger: logger.child({ scope: "save-manager" })
+  });
+
   const world = createWorld({ seedManager });
 
   logger.info("Fargonia boot sequence complete.");
+
+  const savePath = saveManager.saveWorld(world, "slot1");
+  logger.info("Initial world save created.", {
+    slot: "slot1",
+    savePath
+  });
+
   printWorldSummary(world, {
     logger: console,
     title: "INITIAL WORLD SUMMARY"
+  });
+
+  const saves = saveManager.listSaves();
+  logger.info("Available saves scanned.", {
+    saveCount: saves.length
   });
 }
 
